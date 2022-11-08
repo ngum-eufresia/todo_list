@@ -1,34 +1,287 @@
 <!DOCTYPE html>
-
 <html>
+
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="scaffolded-by" content="https://github.com/dart-lang/sdk">
-    <title>todo_list</title>
-    <link rel="stylesheet" href="styles.css">
-    <script defer src="main.dart.js"></script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="scaffolded-by" content="https://github.com/dart-lang/sdk">
+  <title>todo_list</title>
+  <link rel="stylesheet" href="styles.css">
+  <script defer src="main.dart.js"></script>
+  <!-- CSS only -->
+  <!-- Font Awesome -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet">
+  <!-- MDB -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.0.0/mdb.min.css" rel="stylesheet">
 </head>
 
 <body>
+  <div class="section mt-5">
+    <div class="container">
+      <div class="row justify-content-md-center">
+        <div class="col-12 col-md-8">
+          <div id="main" class="card pb-5">
+            <div class="card-body">
+              <h1> Todo List </h1>
+              <form id="task-form">
+                <div class="form-group"> <label for="task">New Task</label> <input type="text" id="todo"
+                    class="form-control" name="task" id="task" placeholder="Name ..."> </div> <button type="submit"
+                  class="btn btn-primary mt-" id="add">Add task </button>
+              </form>
+              <!-- <hr>
+            <h5> Tasks </h5>
+            <div class="form-group"> <label for="filter">Filter tasks</label> <input type="email" class="form-control"
+                name="filter" id="filter" placeholder=" Task ..."> </div>
+            <div>
+              <ul class="list-group pr-0">
+                 <li class="list-group-item d-flex align-items-center"> Task 1 <i class="fas fa-times text-danger mr-auto delete-item"></i> </li> -->
+              <!-- </ul>
+              <button type="submit" class="clear-tasks btn btn-danger mt-3"> Clear Tasks</button> -->
+            </div>
 
-  <div id="output"></div>
-  <label for ="todo"> TODO_LIST</label>
-  <br/>
-  
-  <input type = "text" id ="todo" placeholder = " + Enter a todo">
-  <button id="add">add</button>
-  <div id = "todo_list">
-
+            <div class="d-flex justify-content-center pt-2">
+              <div class="priority">
+                <p3 class="big">Select priority</p3>
+                <select class="select">
+                  <option value="1">All</option>
+                  <option value="2">less</option>
+                  <option value="3">medium</option>
+                  <option value="4">more</option>
+                </select>
+              </div>
+              <div class="due-dat"></div>
+              <strong>
+                <p class="small mb-0 ms-4 text-muted">Due date</p>
+              </strong>
+              <div action="/action_page.php" id="due-date">
+                <input type="date" id="due" name="due-date">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
 
-<!-- Default checkbox -->
-<div class="form-check">
-  <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" />
-  <label class="form-check-label" for="flexCheckDefault"></label>
-</div>
+  <div id="todo-list">
+    <form id="form">
+      <section class="vh-100 gradient-custom-2">
+        <div class="container py-5 h-100">
+          <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-12 col-xl-10">
 
+              <div class="card mask-custom">
+                <div class="card-body p-4 text-white">
+
+                  <div class="text-center pt-3 pb-2">
+                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                      alt="Check" width="60">
+                    <h2 class="my-4">Todo List</h2>
+                  </div>
+
+                  <table class="table text-white mb-0" id="table">
+                    <thead>
+                      <tr>
+                        <th scope="col">Task</th>
+                        <th scope="col">Due-date</th>
+                        <th scope="col">Priotity</th>
+                        <th scope="col">Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="fw-normal">
+                        <th>
+                          <div id="todo-list">
+                            <div class="d-flex align-items-center">
+                              <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+
+                            </div>
+                          </div>
+
+                        </th>
+                        <td class="align-middle">
+                          <span>
+                            <div class="date" id="date">
+                              <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                                <p><i class="fas fa-info-circle me-2"></i></p>
+                              </a>
+                            </div>
+                          </span>
+                        </td>
+                        <div class="priority" id="priority">
+                          <td class="align-middle">
+                            <h6 class="mb-0"><span class="badge bg-danger"></span></h6>
+                          </td>
+                        </div>
+                        <td class="align-middle">
+                          <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                              class="fas fa-pencil-alt me-3"></i></a>
+                          <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
+                              class="fas fa-trash-alt fa-lg text-warning"></i></a>
+
+                        </td>
+                      </tr>
+                      <tr class="fw-normal">
+                        <th>
+                          <div class="d-flex align-items-center">
+                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                            eat
+                          </div>
+
+                        </th>
+                        <td class="align-middle">
+                          <div>
+                            <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                              <p><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                            </a>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <h6 class="mb-0"><span class="badge bg-success">Low priority</span></h6>
+                        </td>
+                        <td class="align-middle">
+                          <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                              class="fas fa-pencil-alt me-3"></i></a>
+                          <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
+                              class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                        </td>
+                      </tr>
+                      <tr class="fw-normal">
+                        <th>
+                          <div class="d-flex align-items-center">
+                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                            Dance
+                          </div>
+
+                        </th>
+                        <td class="align-middle">
+                          <div>
+                            <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                              <p><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                            </a>
+                          </div>
+                        </td>
+                        <div>
+                          <td class="align-middle">
+                            <h6 class="mb-0"><span class="badge bg-warning">Middle priority</span></h6>
+                          </td>
+                        </div>
+                        <td class="align-middle">
+                          <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                              class="fas fa-pencil-alt me-3"></i></a>
+                          <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
+                              class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                        </td>
+                      </tr>
+                      <tr class="fw-normal">
+                        <th>
+                          <div class="d-flex align-items-center">
+                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                            Drink
+                          </div>
+
+                        </th>
+                        <td class="align-middle">
+                          <div>
+                            <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                              <p><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                            </a>
+                          </div>
+                        </td>
+                        <td class="align-middle">
+                          <h6 class="mb-0"><span class="badge bg-danger">High priority</span></h6>
+                        </td>
+                        <td class="align-middle">
+                          <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                              class="fas fa-pencil-alt me-3"></i></a>
+                          <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
+                              class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                        </td>
+                      </tr>
+                      <tr class="fw-normal">
+                        <th class="border-0">
+                          <div class="d-flex align-items-center">
+                            <input class="form-check-input me-2" type="checkbox" value="" aria-label="..." />
+                            <span class=>bath</span>
+                          </div>
+                        </th>
+                        <td class="border-0 align-middle">
+                          <div>
+                            <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
+                              <p><i class="fas fa-info-circle me-2"></i>28th Jun 2020</p>
+                            </a>
+                          </div>
+                        <td class="border-0 align-middle">
+                          <h6 class="mb-0"><span class="badge bg-success">Low priority</span></h6>
+                        </td>
+                        <td class="border-0 align-middle">
+                          <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                              class="fas fa-pencil-alt me-3"></i></a>
+                          <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
+                              class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- <input type="text" id="todo" placeholder=" +Enter a Todo." /> -->
+      <!-- <div class="form-outline border border-2 border-dark d-flex p-2 justify-content-center align-content-center">
+        <input type="text" id="typeText" class="form-control">
+        <label class="form-label" for="typeText">Text input</label>
+        <button id="add" class="btn bg-primary">add</button>
+      </div>  -->
+
+
+
+
+      <!-- </sectiion>  -->
+
+
+      <!-- <table class="table">
+      <tr>
+        <th scope="col">todo</th>
+        <th scope="col">Priority</th>
+        <th scope="col">Actions</th>
+        <th scope="col">date</th>
+      </tr>
+      <tr class="fw-normal">
+        <th>
+          <span class="ms-2">Eat</span>
+        </th>
+        <td class="align-middle">
+          <h6 class="mb-0">
+            <span class="badge bg-success">Low</span>
+          </h6>
+        </td>
+        <td class="align-middle">
+          <a href="#!" data-mdb-toggle="tooltip" title="Done">
+            <i class="fas fa-check fa-lg text-success me-3"></i>
+          </a>
+          <a href="#!" data-mdb-toggle="tooltip" title="Remove">
+            <i class="fas fa-trash-alt fa-lg text-warning"></i>
+          </a>
+        </td>
+      </tr>
+    </table>
+    </div>
+    </div> -->
+      <div id="output"></div>
+    </form>
+    <button id="clear"></button>
+  </div>
 </body>
+
 </html>

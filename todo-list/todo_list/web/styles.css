@@ -1,14 +1,81 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
 html, body {
-  width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
   font-family: 'Roboto', sans-serif;
 }
 
-#output {
+form{
+  margin-left: 9rem;
+  margin-right: 9rem;
+  /* background-color: rgb(17, 17, 46); */
+}
+
+
+
+  #output {
   padding: 20px;
   text-align: center;
+}
+/* p2{
+  margin-left: 11rem;
+  margin-right: 2px;
+} */
+.text-center{
+  color:black;
+}
+#due{
+  margin-right: 10.5rem;
+}
+
+  .priority{
+
+  }
+  #due-date{
+    margin-left: 0.3rem;
+    
+  }
+  table {
+    background: rgba(24, 24, 16, 0.2);
+    width: 3rem;
+    height : 0.4em;
+    border-radius: 10px;
+    width:23rem
+
+  }
+
+  #add:hover{
+    color :#fd6c0b;
+  }
+  #card{
+  }
+
+/* #todo{
+  border-radius: 10px;
+  padding-inline: 10px;
+  padding: 2rem 29rem 0.5rem 1rem;
+  margin-left:7rem;
+  margin-bottom: 2rem; */
+  /* min-height: auto;
+  padding-top: 4px;
+  padding-bottom: 3.28px;
+  transition: all .1s linear; */
+
+
+
+.btn{
+  /* position: relative;7ym
+  left: 0rem;
+  top: 31rem;
+
+  background-color: #3265b9;
+  color: #fff;
+
+  text-transform: uppercase;
+  vertical-align: bottom; */
+  /* margin-bottom: 500px; */
+
+}
+.row{
 }
