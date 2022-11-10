@@ -1,19 +1,28 @@
-import 'dart:html';
+import 'dart:html' hide File;
+import 'storage.dart';
+import 'dart:convert';
+import 'display.dart';
 
 late InputElement todoInput;
 late InputElement checkbox;
 late DivElement uiList;
+late DivElement date;
+late DivElement priority;
+late DivElement actions;
 late ButtonElement buttonAdd;
 late ButtonElement buttonClear;
+
 late ButtonElement buttonDone;
+late TableElement table;
 late TableElement tr;
 
 List<Todo> todoList = [];
 List<Todo> pleteList = [];
 
 void main() {
-  print("hello world");
-  tr = querySelector('#table') as TableElement;
+  date = querySelector('#date') as DivElement;
+  priority = querySelector('#priority') as DivElement;
+  actions = querySelector('#actions') as DivElement;
   todoInput = querySelector('#todo') as InputElement;
   uiList = querySelector('#todo-list') as DivElement;
   buttonAdd = querySelector('#add') as ButtonElement;
@@ -27,7 +36,7 @@ void addATodo(Event event) {
   if (todoInput.value == '') {
     return;
   }
-  Todo todo = Todo(todoInput.value);
+  Todo todo = Todo(todoInput.value, date, priority);
   todoList.add(todo);
   displayTodo();
   todoInput.value = '';
@@ -39,19 +48,24 @@ void displayTodo() {
 
   todoList.forEach((todo) {
     DivElement div = DivElement();
+
+    DivElement date = DivElement();
+    DivElement priority = DivElement();
+    DivElement actions = DivElement();
     TableElement tr = TableElement();
     Element span = Element.span();
     ButtonElement buttonRemove = ButtonElement();
     ButtonElement buttonDone = ButtonElement();
     Element secondSpan = Element.span();
 
-    Element colOne = Element.div();
-
     //  colOne.appendHtml(todo.priority.toString());
 
     buttonDone.id = todo.id.toString();
+    tr.id = todo.id.toString();
     buttonRemove.id = todo.id.toString();
-    colOne.id = todo.id.toString();
+    date.id = todo.id.toString();
+    priority.id = todo.id.toString();
+    actions.id = todo.id.toString();
     buttonRemove.onClick.listen(removeTodo);
     buttonDone.onClick.listen(todoDone);
     final checkbox = checkBoxBuild(todo.id.toString());
@@ -60,13 +74,17 @@ void displayTodo() {
     // checkBox.onClick.listen(checkTodo);
 
     span.text = todo.todo;
+
     secondSpan.children.add(checkbox);
     tr.children.add(span);
     div.children.add(span);
-    div.children.add(secondSpan);
     div.children.add(buttonRemove);
     div.children.add(buttonDone);
-    div.children.add(colOne);
+    tr.children.add(date);
+    tr.children.add(priority);
+    tr.children.add(actions);
+    div.children.add(tr);
+
     uiList.children.add(div);
   });
 }
@@ -121,9 +139,16 @@ class Todo {
   static int _id = 0;
   int id = 0;
   String? todo;
+  String date;
+  String priority;
 
-  Todo(String? userInput) {
-    id = _id++;
-    todo = userInput;
-  }
+  Todo(this.todo, this.date, this.priority) : id = _id++;
+  Todo.whereJason(Map<String, dynamic> json)
+      : id = json['id'],
+        todo = json['text'],
+        date = json['dateTime'],
+        priority = json['priority'];
+
+  Map<String, dynamic> toJson() =>
+      {'id': id, 'text': todo, 'dateTime': date, 'priority': priority};
 }

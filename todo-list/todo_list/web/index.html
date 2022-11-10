@@ -26,11 +26,11 @@
           <div id="main" class="card pb-5">
             <div class="card-body">
               <h1> Todo List </h1>
-              <form id="task-form">
-                <div class="form-group"> <label for="task">New Task</label> <input type="text" id="todo"
+              <div>
+                <div class> <label for="task">New Task</label> <input type="text" id="todo"
                     class="form-control" name="task" id="task" placeholder="Name ..."> </div> <button type="submit"
                   class="btn btn-primary mt-" id="add">Add task </button>
-              </form>
+                </div>
               <!-- <hr>
             <h5> Tasks </h5>
             <div class="form-group"> <label for="filter">Filter tasks</label> <input type="email" class="form-control"
@@ -43,7 +43,7 @@
             </div>
 
             <div class="d-flex justify-content-center pt-2">
-              <div class="priority">
+              <div class="priority" id="priority">
                 <p3 class="big">Select priority</p3>
                 <select class="select">
                   <option value="1">All</option>
@@ -52,7 +52,7 @@
                   <option value="4">more</option>
                 </select>
               </div>
-              <div class="due-dat"></div>
+              <div class="due-dat" id="date"></div>
               <strong>
                 <p class="small mb-0 ms-4 text-muted">Due date</p>
               </strong>
@@ -105,25 +105,28 @@
                         </th>
                         <td class="align-middle">
                           <span>
-                            <div class="date" id="date">
+                            <div class="date">
                               <a href="#!" class="text-muted" data-mdb-toggle="tooltip" title="Created date">
                                 <p><i class="fas fa-info-circle me-2"></i></p>
+                            
                               </a>
                             </div>
                           </span>
                         </td>
-                        <div class="priority" id="priority">
+                        <div class = "prio">
                           <td class="align-middle">
                             <h6 class="mb-0"><span class="badge bg-danger"></span></h6>
                           </td>
                         </div>
-                        <td class="align-middle">
-                          <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
-                              class="fas fa-pencil-alt me-3"></i></a>
-                          <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
-                              class="fas fa-trash-alt fa-lg text-warning"></i></a>
+                        <div id="actions">
+                          <td class="align-middle">
+                            <a href="#!" class="text-info" data-mdb-toggle="tooltip" title="Edit todo"><i
+                                class="fas fa-pencil-alt me-3"></i></a>
+                            <a href="#!" data-mdb-toggle="tooltip" title="Remove"><i
+                                class="fas fa-trash-alt fa-lg text-warning"></i></a>
 
-                        </td>
+                          </td>
+                        </div>
                       </tr>
                       <tr class="fw-normal">
                         <th>
@@ -280,7 +283,7 @@
     </div> -->
       <div id="output"></div>
     </form>
-    <button id="clear"></button>
+    <button id="clear"> clear todo</button>
   </div>
 </body>
 
