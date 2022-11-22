@@ -18,8 +18,13 @@ late ButtonElement buttonDone;
 late TableElement table;
 late TableElement tr;
 late TableSectionElement mytableBody;
-
-late InputElement checkam;
+late TableSectionElement myTable;
+late InputElement editText;
+late Element checkam;
+late SelectElement editPriority;
+late InputElement editDate;
+late ButtonElement editButton;
+late InputElement editTodoId;
 
 // List<Todo> todoList = [];
 List<Todo> pleteList = [];
@@ -37,6 +42,14 @@ void main() {
   buttonAdd = querySelector('#add') as ButtonElement;
   buttonClear = querySelector('#clear') as ButtonElement;
   mytableBody = querySelector("table#table tbody") as TableSectionElement;
+  myTable = querySelector("table#newTable tbody") as TableSectionElement;
+  editText = querySelector("#todo") as InputElement;
+  editPriority = querySelector("#priority") as SelectElement;
+  editDate = querySelector("#due") as InputElement;
+  editButton = querySelector("#add") as ButtonElement;
+  editTodoId = querySelector("#edit-todo-id") as InputElement;
+  //editSection = querySelector("#selector1") as DivElement;
+
   print("check box value");
 
   // print(checkam.checked);
@@ -52,12 +65,29 @@ void addATodo(Event event) {
   if (todoInput.value == '') {
     return;
   }
-  Todo todo =
-      Todo(todoInput.value, dateElement.value.toString(), priority.value!);
-  todoList.add(todo);
+  String todoId = editTodoId.value as String;
+  print("todoIdtodoIdtodoId");
+  print(todoId);
+  if (editTodoId.value == '') {
+    Todo todo =Todo(todoInput.value, dateElement.value.toString(), priority.value!);
+    todoList.add(todo);
+  } else {
+    List<Todo> updateList = [];
+    todoList.forEach((elTodo) {
+      print("todo.id {elTodo.id}");
+      print("todoId {elTodo}");
+      if (elTodo.id == int.parse(todoId)) {
+        elTodo.todo = todoInput.value;
+        elTodo.priority = priority.value!;
+        elTodo.date = dateElement.value.toString();
+      }
+      updateList.add(elTodo);
+    });
+    todoList = updateList;
+  }
+  addStorage(todoList);
   displayTodo();
   //completeTodo();
-  addStorage(todoList);
   todoInput.value = '';
   dateElement.value = '';
   priority.value = '';
@@ -77,24 +107,13 @@ checkStatus(MouseEvent event) {
     }
     jList.add(todo);
   });
-  // for (Todo todo  in todoList) {
-  //             if (todo.id == todoId)
-  //             {
-  //               todo.status = 1;
-  //             }
-
-  // }
-
-  // todoList = todoList.map((todo) => {
-  //           if (todo.id == todoId)
-  //           {
-  //             todo.status = 1;
-  //           }
-  //           return todo;
-  //           })  as List<Todo>;
   print("=====todo list after update====");
   todoList = jList;
+
+  print("I am prenting the jlist");
   print(jList);
+  print("i am printing the todolist");
+  print(todoList);
 
   // -update the status of the element id and create a new array(//use map function)
   //todoList(Map<String, String> value) {
@@ -113,7 +132,7 @@ checkStatus(MouseEvent event) {
   //   }
   // }
 
-  addStorage(todoList);
+  // addStorage(todoList);
   displayTodo();
 
 //     var newlist = groupBy(todoList, (Map obj) => obj['todoId']);
@@ -161,38 +180,169 @@ checkStatus(MouseEvent event) {
    */
 }
 
+editTodo(MouseEvent event) {
+  // Element p = Element.p();
+  Element checkId = (event.currentTarget as Element);
+  int todoId = int.parse(checkId.id.split('-')[0]);
+  print(todoId);
+  //List<Todo> editList = [];
+
+  Todo myTodo = todoList.firstWhere((todo) =>
+      todo.id == todoId); //firstWhereOrNull((element) =>  todoId == element.id)
+
+  editPriority.value = myTodo.priority;
+
+  //editText.innerHtml = "";
+  //p.children.add(text);
+  editText.value = myTodo.todo!;
+  // editText.innerHtml = "";
+  editDate.value = myTodo.date;
+  editTodoId.value = myTodo.id.toString();
+
+  //editPriority.innerHtml = "";
+  //editPriority.children.add(priority);
+  editButton.innerHtml = "Edit todo";
+  // todoList.forEach((todo) {
+  //   if (todoId == todo.id) {
+  //     print("making progress");
+  //     print(todo.status);
+  //     //todo.status = 2;
+
+  //     // final text = myTextInput(todo.todo!);
+  //     //final date = dateInput(todo.date);
+  //     editPriority.value = todo.priority;
+
+  //     //editText.innerHtml = "";
+  //     //p.children.add(text);
+  //     editText.value = todo.todo!;
+  //     // editText.innerHtml = "";
+  //     editDate.value = todo.date;
+
+  //     //editPriority.innerHtml = "";
+  //     //editPriority.children.add(priority);
+  //     editButton.innerHtml = "Edit todo";
+  //   }
+
+  //   // while (todo.id == todoId) {
+
+  //   // }
+
+  //   editList.add(myTodo);
+
+  //   //todoList.replaceRange(todoId + 1, todoId+2, [todo]);
+  // });
+
+  // todoList = editList;
+  //addStorage(todoList);
+  //displayTodo();
+  //todoList = editList;
+}
+
+//todoList = editList;
+// todoList.forEach((todo) {
+//   if (todoId == todo.id) {
+//     print("making progress");
+//     print(todo.status);
+//     //todo.status = 2;
+
+//     // final text = myTextInput(todo.todo!);
+//     //final date = dateInput(todo.date);
+//     editPriority.value = todo.priority;
+
+//     //editText.innerHtml = "";
+//     //p.children.add(text);
+//     editText.value = todo.todo!;
+//     // editText.innerHtml = "";
+//     editDate.value = todo.date;
+
+//     //editPriority.innerHtml = "";
+//     //editPriority.children.add(priority);
+//     editButton.innerHtml = "Edit todo";
+//   }
+
+//   // while (todo.id == todoId) {
+
+//   // }
+
+//   editList.add(myTodo);
+
+//   //todoList.replaceRange(todoId + 1, todoId+2, [todo]);
+// });
+
+// todoList = editList;
+//addStorage(todoList);
+//displayTodo();
+//todoList = editList;
+
+// saveOnEditTodo(MouseEvent event) {
+//   Element todoCheckbox = (event.currentTarget as Element);
+//   int todoId = int.parse(todoCheckbox.getAttribute("todo-id")!);
+//   addStorage(todolist);
+// }
+
 void displayTodo() {
 //Item is now displayed on the page.
   // final spin = loadingSpinner(  uiList.children.clear();
   uiList.children.clear();
   Element tbody = Element.table();
-  Element myTable = Element.table();
   DivElement div = DivElement();
   mytableBody.innerHtml = "";
+  myTable.innerHtml = "";
 
   todoList.forEach((todo) {
     print(todo.status);
     print(todo.status == 0);
+
+    //mytableBody.children.add(ui);
+
+    if (editTodoId == todo.id) {}
+
     if (todo.status == 0) {
+      editButton.innerHtml = "Add Task";
       final checkbox = displayCheckbox(todo.id);
       final text = myTextInput(todo.todo!);
       final date = dateInput(todo.date);
       final prio = PrioritySelect(todo.priority);
       final action = Actions(todo.id);
-      final ui = buildUl(
-          checkbox, text, date, prio, action); //(checkbox, date, prio, action);
+      final ui = buildUl(checkbox, text, date, prio, action);
 
       mytableBody.children.add(ui);
+
       //myTable.children.add(ui);
 
-      tbody.className = "table text-white mb-0";
+      //tbody.className = "table text-white mb-0";
       // myTable.className = "table text-white mb-2";
       // final text = myTextInput(todo.todo!);
       // final doneDate = dateInput(todo.date);
       // final newUi = buildUl(text, doneDate, text, doneDate);
       // tbody.children.add(newUi);
       // tbody.className = "table table-dark table-striped mt-5";
+    } else if (todo.status == 1) {
+      //final checkbox = displayCheckbox(todo.id);
+
+      final text = myTextInput(todo.todo!);
+      final date = dateInput(todo.date);
+      final prio = PrioritySelect(todo.priority);
+      final action = Actions(todo.id);
+      final ui = buildNewUi(text, date, prio, action);
+
+      myTable.children.add(ui);
     }
+    // } else {
+    //   //editButton.innerHtml = "Edit todo";
+    //   final checkbox = displayCheckbox(todo.id);
+    //   final text = myTextInput(todo.todo!);
+    //   final date = dateInput(todo.date);
+    //   final prio = PrioritySelect(todo.priority);
+    //   final action = Actions(todo.id);
+    //   print("h------------e---------r-------e");
+    //   print(text);
+    //   final ui = buildUl(checkbox, text, date, prio, action);
+
+    //   mytableBody.children.add(ui);
+    //   todo.status = 0;
+    // }
+
     //  else {
     //   final checkbox = displayCheckbox(todo.todo!);
     //   final date = dateInput(todo.date);
@@ -207,10 +357,12 @@ void displayTodo() {
     //   tbody.className = "table text-white mb-0";
     //   // myTable.className = "table text-white mb-2";
     // }
-  });
 
-  // uiList.children.add(tbody);
+    todo.status = 0;
+  });
 }
+
+// uiList.children.add(tbody);
 
 // completeTodo() {
 //   DivElement div = DivElement();
@@ -278,14 +430,15 @@ void removeTodo(MouseEvent event) {
   print('Todolist');
   Element button = (event.currentTarget as Element);
   int key = int.parse(button.id.split('-')[0]);
+  print("=======Understanding delete button=============");
+  print(key);
   todoList.removeWhere((todo) => todo.id == key);
-  print("after removing todo");
   addStorage(todoList);
   displayTodo();
   print("hello");
 }
 
-void editTodo(MouseEvent) {}
+//void editTodo(MouseEvent) {}
 
 // void todoDone(MouseEvent event) {
 //   event.stopPropagation();
@@ -334,4 +487,10 @@ class Todo {
         'priority': priority,
         'status': status
       };
+}
+
+
+class subTodo extends Todo{
+  subTodo(super.todo, super.date, super.priority);
+
 }

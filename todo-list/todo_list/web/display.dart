@@ -63,9 +63,18 @@ myCheckbox(id) {
 // }
 
 myTextInput(String text) {
+  ButtonElement subTodo = ButtonElement();
   Element p = Element.p();
+  Element td = Element.td();
   p.text = text;
-  return p;
+
+  subTodo.type = "button";
+  subTodo.innerHtml = "addSub";
+  subTodo.className = "border-0 btn-rounded";
+  td.children.add(p);
+  td.children.add(subTodo);
+  td.className = "flex align-items-center border-0";
+  return td;
 }
 
 displayCheckbox(int? id) {
@@ -128,8 +137,10 @@ Actions(int? id) {
   DivElement div = DivElement();
   Element p1 = Element.p();
   ButtonElement butDelete = ButtonElement();
-  Element p2 = Element.p();
   ButtonElement butEdit = ButtonElement();
+
+  Element p2 = Element.p();
+
   Element td = Element.td();
   p2.className = "fas fa-pencil-alt me-3";
   p1.className = "fas fa-trash-alt fa-lg text-warning";
@@ -144,7 +155,8 @@ Actions(int? id) {
   butEdit.className = "ms-4 border-0";
   butEdit.id = id.toString();
   butEdit.children.add(p2);
-  butDelete.onClick.listen(editTodo);
+  butEdit.onClick.listen(editTodo);
+  print("Hello world");
 
   div.children.add(butEdit);
   div.children.add(butDelete);
@@ -175,6 +187,22 @@ buildUl(Element todo_checkbox, Element todo_text, Element todo_date,
   Element tr = Element.tr();
 
   tr.children.add(todo_checkbox);
+  tr.children.add(todo_text);
+  tr.children.add(todo_date);
+  tr.children.add(todo_priority);
+  tr.children.add(todo_action);
+
+  tr.className = "justify-content-md-center fw-normal";
+
+  // table.children.add(tr);
+  // table.className = "table text-white mb-0";
+  return tr;
+}
+
+buildNewUi(Element todo_text, Element todo_date, Element todo_priority,
+    Element todo_action) {
+  Element tr = Element.tr();
+
   tr.children.add(todo_text);
   tr.children.add(todo_date);
   tr.children.add(todo_priority);

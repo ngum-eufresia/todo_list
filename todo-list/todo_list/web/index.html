@@ -19,18 +19,22 @@
 </head>
 
 <body>
-  <input type="checkbox" id="checks" value="0" />
+  <!-- <input type="checkbox" id="checks" value="0" /> -->
   <div class="section mt-5">
-    <div class="container">
+    <div class="container id = section">
       <div class="row justify-content-md-center">
         <div class="col-12 col-md-8">
           <div id="main" class="card pb-5">
             <div class="card-body">
               <h1> Todo List </h1>
               <div>
-                <div class> <label for="task">New Task</label> <input type="text" id="todo" class="form-control"
-                    name="task" id="task" placeholder="Name ..."> </div> <button type="submit"
-                  class="btn btn-primary mt-" id="add">Add task </button>
+                <div class id="myText"> <label for="task">New Task</label>
+
+                  <input type="text" id="todo" class="form-control" name="task" id="task" placeholder="Name ...">
+
+
+                </div>
+                <button type="submit" class="btn btn-primary btn-rounded" id="add"></button>
               </div>
               <!-- <hr>
             <h5> Tasks </h5>
@@ -53,13 +57,15 @@
                   <option>High priority</option>
                 </select>
               </div>
-              <div class="due-dat" id="date"></div>
+              <div class="due-dat" id="date"> </div>
               <strong>
                 <p class="small mb-0 ms-4 text-muted">Due date</p>
               </strong>
               <div action="/action_page.php" id="due-date">
                 <input type="date" id="due" name="due-date">
-                </a>
+              </div>
+              <div class="d-none">
+                <input type="hidden" id="edit-todo-id" name="edit-todo-id">
               </div>
             </div>
           </div>
@@ -70,35 +76,61 @@
 
 
 
+  <!-- <hr>
+              <h5> Tasks </h5>
+              <div class="form-group"> <label for="filter">Filter tasks</label> <input type="email" class="form-control"
+                  name="filter" id="filter" placeholder=" Task ..."> </div>
+              <div>
+                <ul class="list-group pr-0">
+                   <li class="list-group-item d-flex align-items-center"> Task 1 <i class="fas fa-times text-danger mr-auto delete-item"></i> </li> -->
+  <!-- </ul>
+                <button type="submit" class="clear-tasks btn btn-danger mt-3"> Clear Tasks</button> -->
+
+
+
+
+
   <!-- <form id="form"> -->
-  <!-- <section class="vh-100 gradient-custom-2"> -->
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify-content-center align-items-center h-100">
-      <div class="col-md-12 col-xl-10">
+  <section class="vh-10 gradient-custom-2"> 
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-12 col-xl-10">
 
-        <div class="card mask-custom">
-          <div class="card-body p-4 text-white">
+          <div class="card mask-custom">
+            <div class="card-body p-4 text-white">
 
-            <div class="text-center pt-3 pb-2">
-              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check"
-                width="60">
-              <h2 class="my-4">Todo List</h2>
+              <div class="text-center pt-3 pb-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check"
+                  width="60">
+                <h2 class="my-4">Todo List</h2>
+              </div>
+
+              <table class="table text-white mb-0" id="table">
+                <thead>
+                  <tr>
+                    <th scope="col"></th>
+                    <th scope="col">Task</th>
+                    <th scope="col">Due-date</th>
+                    <th scope="col">Priotity</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+
+
+
+
             </div>
+          </div>
 
-            <table class="table text-white mb-0" id="table">
-              <thead>
-                <tr>
-                  <th scope="col"></th>
-                  <th scope="col">Task</th>
-                  <th scope="col">Due-date</th>
-                  <th scope="col">Priotity</th>
-                  <th scope="col">Actions</th>
-                </tr>
-              </thead>
-              <tbody></tbody>
-            </table>
-            <div id="todo-list">
-              <!-- <tbody >
+        </div>
+      </div>
+    </div>
+    <div id="todo-list">
+
+      <input type="buttonbadge bg-success" />
+      <!-- <tbody >
                   <tr class="fw-normal">
                     <td>
                       <div class="d-flex align-items-center">
@@ -124,8 +156,32 @@
                     </td>
                   </tr>
                 </tbody>  -->
-            </div>
-            <!-- <table class="table table-dark table-striped" id="table">
+    </div>
+
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-md-12 col-xl-10">
+
+          <div class="card mask-custom">
+            <div class="card-body p-4 text-white">
+
+              <div class="text-center pt-3 pb-2">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp" alt="Check"
+                  width="60">
+                <h2 class="my-4">Completed Tasks</h2>
+              </div>
+              <table class="table text-white mb-0 ps-3" id="newTable">
+                <thead>
+                  <tr>
+                    <th scope="col">Task</th>
+                    <th scope="col">Done-date</th>
+                    <th scope="col">Priotity</th>
+                    <th scope="col">Actions</th>
+                  </tr>
+                </thead>
+                <tbody></tbody>
+              </table>
+              <!-- <table class="table table-dark table-striped" id="table">
                   <thead>
                     <tr>
                       <th scope="col">Task</th>
@@ -133,16 +189,39 @@
                     </tr>
                   </thead>
                   </table> -->
-            <div id=" done-todo"></div>
+              <!-- <div id=" done-todo"></div> -->
+              <!-- <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                  <div class="col-md-12 col-xl-10">
+
+                    <div class="card mask-custom">
+                      <div class="card-body p-4 text-white">
+
+                        <div class="text-center pt-3 pb-2">
+                          <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-todo-list/check1.webp"
+                            alt="Check" width="60">
+                          <h2 class="my-4">sub-task</h2>
+                        </div>
+                        <table class="table text-white mb-0 ps-3" id="newTable">
+                          <thead>
+                            <tr>
+                              <th scope="col">Task</th>
+                              <th scope="col">Done-date</th>
+                              <th scope="col">Priotity</th>
+                              <th scope="col">Actions</th>
+                            </tr>
+                          </thead>
+                          <tbody></tbody>
+                        </table>
 
 
 
-          </div>
-        </div>
+                      </div>
+                    </div>
 
-      </div>
-    </div>
-  </div>
+                  </div>
+                </div>
+              </div> -->
   </section>
 
   <!-- <input type="text" id="todo" placeholder=" +Enter a Todo." /> -->

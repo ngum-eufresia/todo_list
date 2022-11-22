@@ -6,7 +6,8 @@ import 'storage.dart';
 late dynamic todoArr;
 late InputElement todoInput;
 List<Todo> todoList = [];
-List<Todo> tempList = [];
+List<Todo> editList = [];
+List<subTodo> subList = [];
 late int todoId;
 
 mystorage() {
